@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   DDS Reformas — tokens do sistema visual
+   Base: preto e grafite. Destaque: dourado. Prata: referência à logo.
+------------------------------------------------------------------- */
+@theme {
+  --color-ink: #080808;
+  --color-ink-2: #101010;
+  --color-graphite: #1b1b1b;
+  --color-graphite-2: #242424;
+  --color-gold: #d5a443;
+  --color-gold-light: #f1ce79;
+  --color-gold-deep: #8a6420; /* dourado para texto sobre fundos claros (contraste AA) */
+  --color-silver: #bfc2c7;
+  --color-paper: #f4f3ef;
+  --color-paper-2: #eae8e1;
+  --color-stone: #9a9da3; /* texto secundário sobre escuro */
+  --color-slate: #55575c; /* texto secundário sobre claro */
+  --color-danger: #f0907f;
+  --color-danger-deep: #b3261e;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --breakpoint-xs: 25rem;
+}
+
+@layer base {
+  :root {
+    --header-h: 4rem;
+    --line-dark: rgb(244 243 239 / 0.12);
+    --line-light: rgb(8 8 8 / 0.12);
+    color-scheme: dark;
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 4.5rem;
+    }
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-light :focus-visible {
+    outline-color: var(--color-gold-deep);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilitários de composição
+------------------------------------------------------------------- */
+@utility container-x {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 48rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 80rem) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 5rem;
+
+  @media (min-width: 48rem) {
+    padding-block: 7rem;
+  }
+
+  @media (min-width: 80rem) {
+    padding-block: 8.5rem;
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.55rem + 4.1vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.45rem + 2.3vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.6;
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.8;
+  }
+}
+
+@utility hairline-dark {
+  border-color: var(--line-dark);
+}
+
+@utility hairline-light {
+  border-color: var(--line-light);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------
+   Revelação discreta no scroll.
+   O conteúdo é visível por padrão; só é ocultado quando o script de
+   revelação está ativo (classe .reveal-ready) e o usuário não pediu
+   movimento reduzido.
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready [data-reveal] {
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0.75rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .hero-in {
+    animation: hero-in 0.8s var(--ease-out-soft) both;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  @keyframes image-in {
+    from {
+      transform: scale(1.03);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .image-in {
+    animation: image-in 1.2s var(--ease-out-soft) both;
+  }
+}
