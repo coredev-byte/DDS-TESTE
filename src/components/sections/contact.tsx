@@ -2,7 +2,7 @@ import { Phone } from "lucide-react";
 import { site } from "@/config/site";
 import { quoteSteps } from "@/content/company";
 import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealHeading } from "@/components/ui/reveal";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { QuoteForm } from "./quote-form";
@@ -15,9 +15,7 @@ export function Contact() {
         <div className="lg:col-span-5">
           <Reveal>
             <p className="eyebrow text-gold">Orçamento</p>
-            <h2 id="contato-title" className="text-h2 mt-5 text-paper">
-              Como solicitar um orçamento.
-            </h2>
+            <RevealHeading id="contato-title" className="text-h2 mt-5 text-paper" text="Como solicitar um orçamento." />
             <p className="mt-6 max-w-[28rem] leading-relaxed text-stone">
               Sem cadastro e sem intermediários: você descreve o que precisa e a conversa continua
               diretamente com a DDS.

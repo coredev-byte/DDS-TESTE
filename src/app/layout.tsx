@@ -3,6 +3,7 @@ import { Inter, Manrope } from "next/font/google";
 import { site } from "@/config/site";
 import { RevealScript } from "@/components/ui/reveal";
 import { Analytics } from "@/components/analytics/analytics";
+import { MotionController } from "@/components/motion/motion-controller";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <RevealScript />
+        <MotionController />
         <Analytics />
       </body>
     </html>

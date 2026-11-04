@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { segments } from "@/content/company";
 import { photos } from "@/content/images";
 import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealHeading } from "@/components/ui/reveal";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 
@@ -18,9 +18,7 @@ export function Segments() {
       <div className="container-x">
         <Reveal className="max-w-[44rem]">
           <p className="eyebrow text-gold">Residencial e comercial</p>
-          <h2 id="segmentos-title" className="text-h2 mt-5 text-paper">
-            Para morar ou para trabalhar, o cuidado com a obra é o mesmo.
-          </h2>
+          <RevealHeading id="segmentos-title" className="text-h2 mt-5 text-paper" text="Para morar ou para trabalhar, o cuidado com a obra é o mesmo." />
         </Reveal>
 
         <div className="mt-14 grid gap-16 md:mt-20 lg:grid-cols-2 lg:gap-x-10 xl:gap-x-16">
@@ -34,8 +32,9 @@ export function Segments() {
                 className={`flex flex-col ${i === 1 ? "lg:pt-28" : ""}`}
                 id={`segmento-${segment.id}`}
               >
-                <figure className="relative">
+                <Reveal as="figure" variant="image" className="relative">
                   <div
+                    data-frame=""
                     className={`relative overflow-hidden bg-ink ${
                       i === 0 ? "aspect-[4/3] lg:aspect-[5/4]" : "aspect-[4/3] lg:aspect-[16/11]"
                     }`}
@@ -44,15 +43,16 @@ export function Segments() {
                       src={photo.src}
                       alt={photo.alt}
                       fill
+                      data-parallax="0.07"
                       placeholder="blur"
                       sizes="(min-width: 64rem) 46vw, 100vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.02] motion-reduce:transition-none motion-reduce:hover:scale-100"
+                      className="object-cover"
                     />
                   </div>
                   <figcaption className="mt-3 text-[0.6875rem] uppercase tracking-[0.14em] text-stone">
                     Imagem ilustrativa
                   </figcaption>
-                </figure>
+                </Reveal>
 
                 <div className="mt-8 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-start">
                   <div>
@@ -75,7 +75,6 @@ export function Segments() {
                       key={item}
                       className="flex items-center gap-3 border-b border-paper/12 py-3 text-[0.9375rem] text-paper/85"
                     >
-                      <span className="h-px w-3 shrink-0 bg-gold" aria-hidden="true" />
                       {item}
                     </li>
                   ))}

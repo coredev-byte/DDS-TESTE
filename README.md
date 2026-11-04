@@ -2,7 +2,7 @@
 
 Site institucional e de conversão da **DDS Reformas** (construção, reformas e retrofit em Alphaville e região). Página única, estática, otimizada para gerar contatos qualificados pelo WhatsApp.
 
-- **Stack:** Next.js 16 (App Router, Cache Components), React 19, TypeScript, Tailwind CSS 4, Lucide.
+- **Stack:** Next.js 16 (App Router, Cache Components), React 19, TypeScript, Tailwind CSS 4, Lucide, Lenis.
 - **Sem backend:** o formulário monta a mensagem e abre o WhatsApp (`wa.me`). Nenhum dado é armazenado.
 
 ## Rodando localmente
@@ -49,6 +49,16 @@ As fotos atuais são de banco de imagens (Unsplash, licença de uso comercial) e
 A logo oficial fica em `src/assets/brand/`:
 - `dds-logo.png` — logo completa (rodapé, dados estruturados);
 - `dds-logo-marca.png` — recorte do símbolo + "DDS", sem as inscrições, para o cabeçalho (onde o texto pequeno ficaria ilegível). Nenhuma das versões foi redimensionada fora de proporção.
+
+## Movimento e rolagem
+
+- **Rolagem suave com inércia** ([Lenis](https://github.com/darkroomengineering/lenis)) no mouse/trackpad; no toque a rolagem continua nativa. É iniciada após o carregamento para não pesar na primeira renderização.
+- **Revelações no scroll** (`src/components/ui/reveal.tsx`): `up` (sobe e aparece), `words` (títulos palavra por palavra com máscara), `image` (cortina vertical nas fotos) e linhas que se desenham nas listas.
+- **Parallax** nas fotografias (`data-parallax="0.06"` = intensidade) e **cortina no hero**: no desktop, o hero fica fixo, escurece e recua enquanto a seção "Sobre" desliza por cima.
+- **Barra de progresso** dourada na base do header.
+- Com "reduzir movimento" ativado no sistema, ou sem JavaScript, todo o conteúdo aparece direto, sem animações.
+
+Controle central: `src/components/motion/motion-controller.tsx`; estilos em `src/app/globals.css`.
 
 ## Medição (opcional)
 

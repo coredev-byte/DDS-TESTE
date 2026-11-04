@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/config/site";
 import { projects, type Project } from "@/content/projects";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealHeading } from "@/components/ui/reveal";
 import { PlanSketch } from "@/components/ui/plan-sketch";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { InstagramIcon } from "@/components/ui/brand-icons";
@@ -59,7 +59,7 @@ function ProjectsPlaceholder() {
           </p>
           <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate">
             Cada projeto trará fotografias da obra, a categoria, a descrição do serviço executado e
-            a localidade geral — quando autorizada pelo cliente.
+            a localidade geral, quando autorizada pelo cliente.
           </p>
         </div>
       </Reveal>
@@ -115,9 +115,7 @@ export function Projects() {
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow text-gold-deep">Projetos</p>
-            <h2 id="projetos-title" className="text-h2 mt-5">
-              Obras executadas pela DDS.
-            </h2>
+            <RevealHeading id="projetos-title" className="text-h2 mt-5" text="Obras executadas pela DDS." />
           </Reveal>
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={80}>
             <p className="leading-relaxed text-slate">

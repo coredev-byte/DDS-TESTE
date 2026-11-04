@@ -6,6 +6,7 @@ import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { buttonStyles } from "@/components/ui/button-styles";
+import { SplitWords } from "@/components/ui/reveal";
 
 const facts = [
   { label: "Atuação", value: "Construção, reformas e retrofit" },
@@ -18,24 +19,33 @@ export function Hero() {
     <section
       id="inicio"
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-ink lg:min-h-[max(42rem,min(100svh,60rem))]"
+      data-hero=""
+      className="relative isolate overflow-hidden bg-ink lg:min-h-[max(42rem,min(100svh,60rem))] [@media(min-width:64rem)_and_(min-height:48rem)]:sticky [@media(min-width:64rem)_and_(min-height:48rem)]:top-0"
     >
-      <div className="container-x relative z-10 flex flex-col pt-[calc(var(--header-h)+2.5rem)] sm:pt-[calc(var(--header-h)+3.5rem)] lg:min-h-[inherit] lg:pt-[calc(var(--header-h)+4rem)] lg:pb-10">
+      <div
+        data-hero-content=""
+        className="container-x relative z-10 flex flex-col pt-[calc(var(--header-h)+2.5rem)] sm:pt-[calc(var(--header-h)+3.5rem)] lg:min-h-[inherit] lg:pt-[calc(var(--header-h)+4rem)] lg:pb-10"
+      >
         <div className="max-w-[36rem] lg:my-auto lg:max-w-[min(40rem,48%)] lg:pr-6 xl:pr-0">
           <p className="hero-in eyebrow text-gold">
             Construção · Reformas · Retrofit
           </p>
 
-          <h1
-            id="hero-title"
-            className="text-display mt-6 text-paper"
-          >
-            Seu projeto, <span className="whitespace-nowrap">nossa execução</span>
-            <span className="text-gold">.</span>
+          <h1 id="hero-title" className="hero-title text-display mt-6 text-paper">
+            <SplitWords text="Seu projeto," />{" "}
+            <span className="whitespace-nowrap">
+              <SplitWords text="nossa" offset={2} />{" "}
+              <span className="w">
+                <span style={{ ["--i" as string]: 3 }}>
+                  execução<span className="text-gold">.</span>
+                </span>
+              </span>
+            </span>
           </h1>
 
           <p
-            className="text-lead mt-6 max-w-[34rem] text-paper/75"
+            className="hero-in text-lead mt-6 max-w-[34rem] text-paper/75"
+            style={{ ["--hero-delay" as string]: "380ms" }}
           >
             Reformas, construções e retrofit para espaços residenciais e comerciais. Qualidade em
             cada etapa, do alicerce ao acabamento.
@@ -43,7 +53,7 @@ export function Hero() {
 
           <p
             className="hero-in mt-6 flex items-center gap-2 text-sm font-medium text-silver"
-            style={{ ["--hero-delay" as string]: "200ms" }}
+            style={{ ["--hero-delay" as string]: "460ms" }}
           >
             <MapPin className="size-4 text-gold" strokeWidth={1.75} aria-hidden="true" />
             Atendimento em {site.region}
@@ -51,7 +61,7 @@ export function Hero() {
 
           <div
             className="hero-in mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
-            style={{ ["--hero-delay" as string]: "260ms" }}
+            style={{ ["--hero-delay" as string]: "520ms" }}
           >
             <TrackedLink
               href={whatsappUrl(whatsappMessages.quote())}
@@ -74,7 +84,7 @@ export function Hero() {
 
           <p
             className="hero-in mt-5 text-sm text-stone"
-            style={{ ["--hero-delay" as string]: "320ms" }}
+            style={{ ["--hero-delay" as string]: "580ms" }}
           >
             Fale direto com {site.contact.person} ·{" "}
             <a
@@ -103,7 +113,10 @@ export function Hero() {
       </div>
 
       {/* Fotografia: abaixo do texto no mobile, coluna direita no desktop */}
-      <div className="relative mt-12 aspect-[4/3] w-full sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:aspect-auto lg:w-[calc(50vw-5rem)]">
+      <div
+        data-hero-media=""
+        className="relative mt-12 aspect-[4/3] w-full sm:aspect-[16/9] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:aspect-auto lg:w-[calc(50vw-5rem)]"
+      >
         <Image
           src={photos.hero.src}
           alt={photos.hero.alt}
@@ -126,6 +139,12 @@ export function Hero() {
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-ink to-transparent lg:hidden"
+        />
+        <div
+          aria-hidden="true"
+          data-hero-shade=""
+          className="absolute inset-0 bg-ink"
+          style={{ opacity: 0 }}
         />
       </div>
 

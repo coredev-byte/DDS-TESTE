@@ -21,7 +21,7 @@ function resolveSiteUrl(): string {
 
 export const site = {
   name: "DDS Reformas",
-  legalLogoName: "DDS — Prestação de Serviços para Construção Civil",
+  legalLogoName: "DDS, Prestação de Serviços para Construção Civil",
   url: resolveSiteUrl(),
   locale: "pt_BR",
 

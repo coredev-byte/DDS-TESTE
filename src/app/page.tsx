@@ -20,8 +20,11 @@ export default function Home() {
       />
       <Header />
       <main id="conteudo" tabIndex={-1} className="focus:outline-none">
-        <Hero />
-        <About />
+        {/* O hero fica fixo enquanto a seção "Sobre" desliza por cima (desktop). */}
+        <div className="relative">
+          <Hero />
+          <About />
+        </div>
         <Services />
         <Segments />
         <Pillars />

@@ -47,7 +47,8 @@ export function ProjectGallery({ title, images }: ProjectGalleryProps) {
 
       <dialog
         ref={dialogRef}
-        aria-label={`Galeria — ${title}`}
+        data-lenis-prevent=""
+        aria-label={`Galeria: ${title}`}
         className="m-auto h-[100dvh] max-h-none w-screen max-w-none bg-ink/95 p-0 text-paper backdrop:bg-ink/80"
         onClick={(e) => {
           if (e.target === e.currentTarget) dialogRef.current?.close();

@@ -100,7 +100,7 @@ export function Footer() {
             © <CurrentYear /> {site.name}. Todos os direitos reservados.
           </p>
           <p className="max-w-[40rem] md:text-right">
-            Fotografias de banco de imagens (Unsplash), meramente ilustrativas — não representam
+            Fotografias de banco de imagens (Unsplash), meramente ilustrativas. Não representam
             obras executadas pela {site.name}.
           </p>
         </div>

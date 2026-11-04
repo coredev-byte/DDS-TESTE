@@ -9,8 +9,7 @@ import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon, InstagramIcon } from "@/components/ui/brand-icons";
 import { buttonStyles } from "@/components/ui/button-styles";
-
-const sectionIds = navigation.map((item) => item.href.slice(1));
+import { getLenis } from "@/lib/smooth-scroll";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,9 +28,8 @@ export function Header() {
 
   // Indicador discreto da seção atual.
   useEffect(() => {
-    const targets = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    // Observa todas as seções: nas que não estão no menu, nenhum item fica destacado.
+    const targets = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
     if (!targets.length) return;
 
     const observer = new IntersectionObserver(
@@ -57,6 +55,7 @@ export function Header() {
     const { body } = document;
     const previousOverflow = body.style.overflow;
     body.style.overflow = "hidden";
+    getLenis()?.stop();
 
     const panel = panelRef.current;
     const focusables = () =>
@@ -93,6 +92,7 @@ export function Header() {
     window.addEventListener("resize", onResize);
     return () => {
       body.style.overflow = previousOverflow;
+      getLenis()?.start();
       document.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
     };
@@ -119,7 +119,7 @@ export function Header() {
         <a
           href="#inicio"
           className="relative -ml-1 flex shrink-0 items-center p-1"
-          aria-label={`${site.name} — voltar ao início`}
+          aria-label={`${site.name}, voltar ao início`}
           onClick={() => open && closeMenu(false)}
         >
           <Image
@@ -192,10 +192,21 @@ export function Header() {
         </div>
       </div>
 
+      {/* Progresso de leitura */}
+      <div
+        aria-hidden="true"
+        data-scroll-progress=""
+        className={`absolute inset-x-0 bottom-[-1px] h-px origin-left bg-gold/80 transition-opacity duration-300 ${
+          solid ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ transform: "scaleX(0)" }}
+      />
+
       {/* Menu mobile */}
       <div
         id="menu-mobile"
         ref={panelRef}
+        data-lenis-prevent=""
         hidden={!open}
         className="fixed inset-x-0 bottom-0 top-[var(--header-h)] overflow-y-auto bg-ink lg:hidden"
       >

@@ -1,6 +1,6 @@
 import { pillars } from "@/content/company";
 import { site } from "@/config/site";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealHeading } from "@/components/ui/reveal";
 
 export function Pillars() {
   return (
@@ -9,11 +9,9 @@ export function Pillars() {
         <Reveal className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
             <p className="eyebrow text-gold">Diferenciais</p>
-            <h2 id="diferenciais-title" className="text-h2 mt-5 text-paper">
-              O que orienta cada obra.
-            </h2>
+            <RevealHeading id="diferenciais-title" className="text-h2 mt-5 text-paper" text="O que orienta cada obra." />
             <p className="mt-6 max-w-[24rem] leading-relaxed text-stone">
-              Quatro compromissos que a {site.name} assume com cada cliente — em projetos pequenos
+              Quatro compromissos que a {site.name} assume com cada cliente, em projetos pequenos
               ou grandes.
             </p>
           </div>

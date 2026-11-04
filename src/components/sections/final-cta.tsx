@@ -2,7 +2,7 @@ import Image from "next/image";
 import { site } from "@/config/site";
 import { photos } from "@/content/images";
 import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealHeading } from "@/components/ui/reveal";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon } from "@/components/ui/brand-icons";
 import { buttonStyles } from "@/components/ui/button-styles";
@@ -17,6 +17,7 @@ export function FinalCta() {
         src={photos.team.src}
         alt=""
         fill
+        data-parallax="0.12"
         placeholder="blur"
         sizes="100vw"
         className="-z-20 object-cover object-[50%_40%]"
@@ -29,12 +30,7 @@ export function FinalCta() {
       <div className="container-x py-24 md:py-32 lg:py-40">
         <Reveal className="max-w-[46rem]">
           <p className="eyebrow text-gold">{site.phrases.signature}</p>
-          <h2
-            id="cta-final-title"
-            className="mt-6 font-display text-[clamp(2.25rem,1.5rem+3.2vw,4.25rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-paper"
-          >
-            Vamos transformar seu próximo projeto em realidade?
-          </h2>
+          <RevealHeading id="cta-final-title" className="mt-6 font-display text-[clamp(2.25rem,1.5rem+3.2vw,4.25rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-paper" text="Vamos transformar seu próximo projeto em realidade?" />
           <p className="text-lead mt-6 max-w-[32rem] text-paper/80">
             Entre em contato com a {site.name} e conte o que você precisa.
           </p>
