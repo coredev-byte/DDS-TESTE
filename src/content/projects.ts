@@ -1,4 +1,9 @@
 import type { StaticImageData } from "next/image";
+import ambiente from "@/assets/projetos/ambiente-finalizado.jpg";
+import recepcao from "@/assets/projetos/recepcao-finalizada.jpg";
+import forro from "@/assets/projetos/execucao-forro.jpg";
+import piso from "@/assets/projetos/instalacao-piso.jpg";
+import preparacao from "@/assets/projetos/preparacao-piso.jpg";
 
 /**
  * Portfólio de obras executadas pela DDS Reformas.
@@ -44,4 +49,28 @@ export type Project = {
   gallery?: ProjectImage[];
 };
 
-export const projects: Project[] = [];
+export const projects: Project[] = [
+  {
+    slug: "acabamentos-comerciais",
+    title: "Acabamentos que transformam o ambiente",
+    category: "Comercial",
+    summary: "Da execução aos detalhes finais: uma seleção de ambientes com piso marmorizado, iluminação embutida e acabamentos claros.",
+    services: ["Acabamentos", "Forro e iluminação", "Pisos e revestimentos"],
+    cover: { src: ambiente, alt: "Ambiente com piso marmorizado, armários brancos e iluminação embutida no forro" },
+    gallery: [
+      { src: recepcao, alt: "Ambiente finalizado com balcão curvo, piso marmorizado e iluminação embutida" },
+      { src: forro, alt: "Execução do forro em ambiente comercial, com piso protegido durante os trabalhos" },
+    ],
+  },
+  {
+    slug: "pisos-comerciais",
+    title: "A renovação começa pela base",
+    category: "Comercial",
+    summary: "Registros da preparação do ambiente e da instalação de piso amadeirado em espaços comerciais.",
+    services: ["Preparação do piso", "Instalação de piso"],
+    cover: { src: piso, alt: "Instalação de piso amadeirado em sala comercial, com parte da manta ainda aparente" },
+    gallery: [
+      { src: preparacao, alt: "Sala comercial com base do piso exposta durante a preparação para o revestimento" },
+    ],
+  },
+];

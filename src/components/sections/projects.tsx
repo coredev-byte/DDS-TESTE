@@ -9,18 +9,18 @@ import { InstagramIcon } from "@/components/ui/brand-icons";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { ProjectGallery } from "./project-gallery";
 
-function ProjectCard({ project, wide }: { project: Project; wide: boolean }) {
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <Reveal as="article" className={wide ? "md:col-span-2" : ""}>
+    <Reveal as="article">
       <div
-        className={`relative overflow-hidden bg-paper-2 ${wide ? "aspect-[16/9]" : "aspect-[4/3]"}`}
+        className="relative aspect-[3/4] overflow-hidden bg-paper-2"
       >
         <Image
           src={project.cover.src}
           alt={project.cover.alt}
           fill
           placeholder="blur"
-          sizes={wide ? "(min-width: 48rem) 90vw, 100vw" : "(min-width: 48rem) 45vw, 100vw"}
+          sizes="(min-width: 48rem) 45vw, 100vw"
           className="object-cover"
         />
       </div>
@@ -120,7 +120,7 @@ export function Projects() {
           <Reveal className="lg:col-span-5 lg:col-start-8" delay={80}>
             <p className="leading-relaxed text-slate">
               {hasProjects
-                ? "Uma seleção de obras realizadas pela DDS Reformas, apresentadas com autorização dos clientes."
+                ? "Um olhar sobre o trabalho da DDS Reformas: ambientes finalizados e detalhes da execução. Explore as galerias para ver mais."
                 : "Este espaço é dedicado exclusivamente a obras reais da DDS Reformas. Para manter a transparência, nenhuma foto de banco de imagens é apresentada aqui como projeto executado."}
             </p>
           </Reveal>
@@ -128,8 +128,8 @@ export function Projects() {
 
         {hasProjects ? (
           <div className="mt-14 grid gap-x-6 gap-y-14 md:mt-16 md:grid-cols-2">
-            {projects.map((project, i) => (
-              <ProjectCard key={project.slug} project={project} wide={i % 3 === 0} />
+            {projects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         ) : (

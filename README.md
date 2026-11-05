@@ -40,11 +40,11 @@ Em `src/config/site.ts`, os campos `email`, `address` e `cnpj` estão como `null
 
 ### Portfólio
 
-A seção **Projetos** exibe uma área "em preparação" enquanto `projects` estiver vazio. Para publicar obras reais (com fotos da DDS e autorização do cliente), siga o exemplo comentado em `src/content/projects.ts` — a grade e a galeria aparecem automaticamente.
+A seção **Projetos** reúne cinco fotos fornecidas pela DDS em dois conjuntos: acabamentos comerciais (três fotos) e pisos comerciais (duas fotos). Apenas as duas capas aparecem na página; as demais fotos ficam nas galerias. Os arquivos originais estão em `src/assets/projetos/`, com otimização automática pelo Next.js. Não são divulgados nomes de clientes ou localidades. Para adicionar registros, edite `src/content/projects.ts`.
 
 ### Fotografias
 
-As fotos atuais são de banco de imagens (Unsplash, licença de uso comercial) e estão identificadas como **ilustrativas** no site e no rodapé. Elas não devem ser usadas como portfólio. Substitua por fotos próprias quando houver material autorizado (mantendo o mesmo nome de arquivo ou atualizando `src/content/images.ts`).
+As fotos fora da seção Projetos são de banco de imagens (Unsplash, licença de uso comercial) e estão identificadas como **ilustrativas** no site e no rodapé. Elas não devem ser usadas como portfólio. Substitua por fotos próprias quando houver material autorizado (mantendo o mesmo nome de arquivo ou atualizando `src/content/images.ts`).
 
 A logo oficial fica em `src/assets/brand/`:
 - `dds-logo.png` — logo completa (rodapé, dados estruturados);

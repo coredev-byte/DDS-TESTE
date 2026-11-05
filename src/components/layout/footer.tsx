@@ -100,8 +100,8 @@ export function Footer() {
             © <CurrentYear /> {site.name}. Todos os direitos reservados.
           </p>
           <p className="max-w-[40rem] md:text-right">
-            Fotografias de banco de imagens (Unsplash), meramente ilustrativas. Não representam
-            obras executadas pela {site.name}.
+            A seção Projetos apresenta fotografias da {site.name}. As demais fotografias,
+            de banco de imagens (Unsplash), são ilustrativas.
           </p>
         </div>
       </div>
