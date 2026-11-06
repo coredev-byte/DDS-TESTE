@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import logoMark from "@/assets/brand/dds-logo-marca.png";
-import { navigation, site } from "@/config/site";
+import { usePathname } from "next/navigation";
+import { navHref, navigation, site } from "@/config/site";
 import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon, InstagramIcon } from "@/components/ui/brand-icons";
@@ -14,7 +15,9 @@ import { getLenis } from "@/lib/smooth-scroll";
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string>("inicio");
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const [active, setActive] = useState<string>(onHome ? "inicio" : "");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -29,6 +32,7 @@ export function Header() {
   // Indicador discreto da seção atual.
   useEffect(() => {
     // Observa todas as seções: nas que não estão no menu, nenhum item fica destacado.
+    if (!onHome) return;
     const targets = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
     if (!targets.length) return;
 
@@ -42,7 +46,7 @@ export function Header() {
     );
     targets.forEach((t) => observer.observe(t));
     return () => observer.disconnect();
-  }, []);
+  }, [onHome]);
 
   const closeMenu = useCallback((returnFocus = true) => {
     setOpen(false);
@@ -117,7 +121,7 @@ export function Header() {
 
       <div className="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
         <a
-          href="#inicio"
+          href={onHome ? "#inicio" : "/"}
           className="relative -ml-1 flex shrink-0 items-center p-1"
           aria-label={`${site.name}, voltar ao início`}
           onClick={() => open && closeMenu(false)}
@@ -135,11 +139,13 @@ export function Header() {
         <nav aria-label="Principal" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {navigation.map((item) => {
-              const isActive = active === item.href.slice(1);
+              const isActive = item.path
+                ? pathname.startsWith(item.path)
+                : onHome && active === item.section;
               return (
-                <li key={item.href}>
+                <li key={item.label}>
                   <a
-                    href={item.href}
+                    href={navHref(item, onHome)}
                     aria-current={isActive ? "location" : undefined}
                     className={`relative inline-flex min-h-11 items-center px-3.5 text-[0.875rem] font-medium transition-colors duration-200 after:absolute after:inset-x-3.5 after:bottom-2 after:h-px after:origin-left after:bg-gold after:transition-transform after:duration-300 ${
                       isActive
@@ -214,9 +220,9 @@ export function Header() {
           <nav aria-label="Menu">
             <ul className="border-t border-paper/10">
               {navigation.map((item, i) => (
-                <li key={item.href} className="border-b border-paper/10">
+                <li key={item.label} className="border-b border-paper/10">
                   <a
-                    href={item.href}
+                    href={navHref(item, onHome)}
                     onClick={() => closeMenu(false)}
                     className="flex min-h-16 items-center justify-between font-display text-2xl font-semibold tracking-tight text-paper"
                   >

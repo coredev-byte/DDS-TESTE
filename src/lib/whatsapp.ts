@@ -18,6 +18,9 @@ export const whatsappMessages = {
     `${greeting} e gostaria de solicitar um orçamento para uma reforma ${segment}.`,
 
   conversation: () => `${greeting} e gostaria de conversar sobre um projeto.`,
+
+  portfolio: (project: string) =>
+    `${greeting}, vi a obra "${project}" no portfólio e gostaria de um orçamento para um projeto parecido.`,
 };
 
 export type QuoteFormData = {

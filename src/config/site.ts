@@ -60,10 +60,18 @@ export const site = {
   },
 } as const;
 
-export const navigation = [
-  { label: "Início", href: "#inicio" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Projetos", href: "#projetos" },
-  { label: "Contato", href: "#contato" },
-] as const;
+type NavItem = { label: string; section?: string; path?: string };
+
+export const navigation: readonly NavItem[] = [
+  { label: "Início", section: "inicio" },
+  { label: "Serviços", section: "servicos" },
+  { label: "Sobre", section: "sobre" },
+  { label: "Portfólio", path: "/portfolio" },
+  { label: "Contato", section: "contato" },
+];
+
+/** Link do item: âncora na página inicial, caminho completo nas demais páginas. */
+export function navHref(item: NavItem, onHome: boolean): string {
+  if (item.path) return item.path;
+  return onHome ? `#${item.section}` : `/#${item.section}`;
+}

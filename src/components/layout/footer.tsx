@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/brand/dds-logo.png";
-import { navigation, site } from "@/config/site";
+import { navHref, navigation, site } from "@/config/site";
 import { whatsappMessages, whatsappUrl } from "@/lib/whatsapp";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { WhatsAppIcon, InstagramIcon } from "@/components/ui/brand-icons";
@@ -34,9 +34,9 @@ export function Footer() {
             </p>
             <ul className="mt-4 grid grid-cols-2 gap-x-6 md:grid-cols-1">
               {navigation.map((item) => (
-                <li key={item.href}>
+                <li key={item.label}>
                   <a
-                    href={item.href}
+                    href={navHref(item, false)}
                     className="inline-flex min-h-10 items-center text-[0.9375rem] text-paper/75 transition-colors hover:text-gold-light"
                   >
                     {item.label}
@@ -100,8 +100,8 @@ export function Footer() {
             © <CurrentYear /> {site.name}. Todos os direitos reservados.
           </p>
           <p className="max-w-[40rem] md:text-right">
-            Fotografias de banco de imagens (Unsplash), meramente ilustrativas. Não representam
-            obras executadas pela {site.name}.
+            As fotos do portfólio são de obras da {site.name}. As demais fotografias são de banco
+            de imagens (Unsplash), meramente ilustrativas.
           </p>
         </div>
       </div>
