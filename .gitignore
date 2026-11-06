@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pacote gerado do kit (o conteúdo está em marketing/perfil-google)
+marketing/*.zip
