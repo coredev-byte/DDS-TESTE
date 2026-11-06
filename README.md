@@ -17,7 +17,7 @@ npm run build && npm start
 ## Publicação na Vercel
 
 1. Importe o repositório na Vercel (framework detectado automaticamente: Next.js).
-2. Em **Settings → Environment Variables**, defina `NEXT_PUBLIC_SITE_URL` com o domínio definitivo (ex.: `https://www.seudominio.com.br`, sem barra no final). Enquanto não houver domínio, o site usa o domínio de produção da Vercel.
+2. O domínio oficial (`https://www.ddsreformas.com.br`) e o ID do Google Analytics (`G-1SBWD540F5`) já estão no código (`src/config/site.ts` e `src/config/analytics.ts`). Para trocá-los sem mexer no código, use `NEXT_PUBLIC_SITE_URL` e `NEXT_PUBLIC_GA4_ID` em **Settings → Environment Variables**.
 3. Faça o deploy. Sitemap (`/sitemap.xml`), robots (`/robots.txt`), Open Graph e canonical usam esse domínio.
 
 Veja `.env.example` para todas as variáveis.

@@ -7,7 +7,8 @@
  * carregados após a autorização.
  */
 export const analyticsConfig = {
-  ga4Id: process.env.NEXT_PUBLIC_GA4_ID || null,
+  /** Propriedade GA4 "Ddsreformas" (fluxo https://www.ddsreformas.com.br). Pode ser trocada por variável de ambiente. */
+  ga4Id: process.env.NEXT_PUBLIC_GA4_ID || "G-1SBWD540F5",
   gtmId: process.env.NEXT_PUBLIC_GTM_ID || null,
   googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || null,
   /** Rótulo da conversão de "contato via WhatsApp" no Google Ads. */

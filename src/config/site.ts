@@ -13,8 +13,8 @@ function resolveSiteUrl(): string {
   if (explicit) return explicit.replace(/\/+$/, "");
 
   // Disponível automaticamente em builds na Vercel.
-  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercelProduction) return `https://${vercelProduction}`;
+  // Domínio oficial (o endereço sem "www" redireciona para este).
+  if (process.env.NODE_ENV === "production") return "https://www.ddsreformas.com.br";
 
   return "http://localhost:3000";
 }
