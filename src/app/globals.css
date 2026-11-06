@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   DDS Reformas — tokens do sistema visual
+   Base: preto e grafite. Destaque: dourado. Prata: referência à logo.
+------------------------------------------------------------------- */
+@theme {
+  --color-ink: #080808;
+  --color-ink-2: #101010;
+  --color-graphite: #1b1b1b;
+  --color-graphite-2: #242424;
+  --color-gold: #d5a443;
+  --color-gold-light: #f1ce79;
+  --color-gold-deep: #8a6420; /* dourado para texto sobre fundos claros (contraste AA) */
+  --color-silver: #bfc2c7;
+  --color-paper: #f4f3ef;
+  --color-paper-2: #eae8e1;
+  --color-stone: #9a9da3; /* texto secundário sobre escuro */
+  --color-slate: #55575c; /* texto secundário sobre claro */
+  --color-danger: #f0907f;
+  --color-danger-deep: #b3261e;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --breakpoint-xs: 25rem;
+}
+
+@layer base {
+  :root {
+    --header-h: 4rem;
+    --line-dark: rgb(244 243 239 / 0.12);
+    --line-light: rgb(8 8 8 / 0.12);
+    color-scheme: dark;
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 4.5rem;
+    }
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-light :focus-visible {
+    outline-color: var(--color-gold-deep);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilitários de composição
+------------------------------------------------------------------- */
+@utility container-x {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 48rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 80rem) {
+    padding-inline: 3rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 5rem;
+
+  @media (min-width: 48rem) {
+    padding-block: 7rem;
+  }
+
+  @media (min-width: 80rem) {
+    padding-block: 8.5rem;
+  }
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.55rem + 4.1vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.45rem + 2.3vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.6;
+}
+
+@utility eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@utility hairline-dark {
+  border-color: var(--line-dark);
+}
+
+@utility hairline-light {
+  border-color: var(--line-light);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------
+   Rolagem suave (Lenis)
+------------------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* ------------------------------------------------------------------
+   Movimento no scroll
+   O conteúdo é visível por padrão; só é ocultado quando o script de
+   revelação está ativo (.reveal-ready) e o usuário não pediu
+   movimento reduzido.
+
+   data-reveal="up"     → sobe e aparece
+   data-reveal="words"  → palavras sobem por trás de uma máscara
+   data-reveal="image"  → cortina vertical + imagem desacelerando
+   data-line            → linha que se desenha da esquerda
+   data-parallax        → deslocamento vertical (controlado via JS)
+------------------------------------------------------------------- */
+:root {
+  --ease-curtain: cubic-bezier(0.77, 0, 0.18, 1);
+  --ease-rise: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal="words"] .w,
+.hero-title .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+[data-reveal="words"] .w > span,
+.hero-title .w > span {
+  display: inline-block;
+}
+
+[data-line] {
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-parallax] {
+    scale: 1.14;
+  }
+
+  .reveal-ready [data-reveal="up"] {
+    transition:
+      opacity 0.9s var(--ease-out-soft),
+      transform 1.1s var(--ease-rise);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal="up"]:not([data-revealed]) {
+    opacity: 0;
+    transform: translate3d(0, 2.75rem, 0);
+  }
+
+  .reveal-ready [data-reveal="words"] .w > span {
+    transition: transform 1.1s var(--ease-rise);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--i, 0) * 55ms);
+  }
+
+  .reveal-ready [data-reveal="words"]:not([data-revealed]) .w > span {
+    transform: translate3d(0, 115%, 0);
+  }
+
+  .reveal-ready [data-reveal="image"] [data-frame] {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 1.4s var(--ease-curtain);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal="image"]:not([data-revealed]) [data-frame] {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .reveal-ready [data-reveal="image"] img {
+    transition: scale 1.8s var(--ease-rise);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal="image"]:not([data-revealed]) img {
+    scale: 1.32;
+  }
+
+  .reveal-ready [data-reveal] [data-line] {
+    transition: transform 1.3s var(--ease-curtain);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 120ms);
+  }
+
+  .reveal-ready [data-reveal]:not([data-revealed]) [data-line] {
+    transform: scaleX(0);
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 1rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .hero-in {
+    animation: hero-in 1s var(--ease-rise) both;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  @keyframes hero-word {
+    from {
+      transform: translate3d(0, 115%, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  .hero-title .w > span {
+    animation: hero-word 1.2s var(--ease-rise) both;
+    animation-delay: calc(120ms + var(--i, 0) * 70ms);
+  }
+
+  @keyframes image-in {
+    from {
+      transform: scale(1.1);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  .image-in {
+    animation: image-in 2.2s var(--ease-rise) both;
+  }
+}
