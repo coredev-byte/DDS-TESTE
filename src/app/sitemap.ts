@@ -15,5 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       images: projects.flatMap((p) => p.images.map((img) => `${site.url}${img.src.src}`)),
     },
+    {
+      url: `${site.url}/contato`,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
   ];
 }

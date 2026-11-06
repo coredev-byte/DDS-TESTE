@@ -67,7 +67,7 @@ export const navigation: readonly NavItem[] = [
   { label: "Serviços", section: "servicos" },
   { label: "Sobre", section: "sobre" },
   { label: "Portfólio", path: "/portfolio" },
-  { label: "Contato", section: "contato" },
+  { label: "Contato", path: "/contato" },
 ];
 
 /** Link do item: âncora na página inicial, caminho completo nas demais páginas. */
